@@ -79,22 +79,22 @@
 				<section>
 					<h2>Literature Survey</h2>
 					<ul>
-						<li>LeNet
+						<li>LeNet [1]
 							<ul>
 								<li>It's first CNN based classification approach for classification of handwritten digits</li>
 							</ul>
 						</li>
-						<li>AlexNet
+						<li>AlexNet [2]
 							<ul>
 								<li>It's ths first CNN model to complete ImageNet challenge of classifying 1000 classes with error rate of 6.9%</li>
 							</ul>
 						</li>
-						<li>VGGNet
+						<li>VGGNet [3]
 							<ul>
-								<li>It's improvisement over alexnet with error rate of 3.1%</li>
+								<li>It's improvement over alexnet with error rate of 3.1%</li>
 							</ul>
 						</li>
-						<li>Max-Pooling Dropout for Regularization of CNN
+						<li>Max-Pooling Dropout for Regularization of CNN [4,5]
 							<ul>
 								<li>Explains how max-pooling works</li>
 								<li>Explains how Regularization can be achieved by using Dropout layers</li>
@@ -105,18 +105,18 @@
 				<section>
 					<h2>Literature Survey</h2>
 					<ul>
-						<li>Matrix capsules with EM routing
+						<li>Dynamic Routing Between Capsules [6]
 							<ul>
-								<li>Explains how max-pooling works</li>
-								<li>Explains how max-pooling works</li>
-								<li>Explains how Regularization can be achieved by using Dropout layers</li>
+								<li>Routing Algorithm</li>
+								<li>Vector computations in capsule</li>
+								<li>Reconstruction as regularization method</li>
 							</ul>
 						</li>
-						<li>Dynamic Routing Between Capsules
+						<li>Matrix capsules with EM routing [7]
 							<ul>
-								<li>Explains how max-pooling works</li>
-								<li>Explains how max-pooling works</li>
-								<li>Explains how Regularization can be achieved by using Dropout layers</li>
+								<li>Capsule architecture and working</li>
+								<li>Routing by agreement</li>
+								<li></li>
 							</ul>
 						</li>
 					</ul>
@@ -434,6 +434,49 @@
 				</section>
 				<section>
 					<h2>Dynamic Routing between Capsules</h2>
+<pre style="color:white">
+Proc ROUTING(u<sub>j|i</sub>, r, l):
+	for all capsule i in layer l and capsule j in layer (l+1): b<sub>ij</sub> &larr; 0
+	for r itenrations do
+		for all capsule i in layer l: c<sub>i</sub> &larr; softmax(b<sub>i</sub>)
+		for all capsule j in layer (l+1): s<sub>j</sub> &larr; &sum;<sub>i</sub> c<sub>ij</sub>u<sub>j|i</sub>
+		for all capsule j in layer (l+1): v<sub>j</sub> &larr; squash(s<sub>j</sub>)
+		for all capsule i in layer l and capsule j in (l+1): 
+			b<sub>ij</sub> &larr; b<sub>ij</sub> + u<sub>j|i</sub>.v<sub>j</sub>
+</pre>
+
+				</section>
+				<section>
+					<h2>Vector computations</h2>
+					<ul>
+						<li class="fragment">
+							Softmax function in CapsNet
+							<ul>
+								<li>
+									\[c_{ij}=\frac{exp(b_{ij})}{\sum_k exp(b_{ik}))} \]</li>
+							</ul>
+							<br>
+						</li>
+						<li class="fragment">
+							Squashing function in CapsNet
+							<ul>
+								<li>
+									\[v_j=\frac{{\left \| s_j \right \|}^2}{1+{\left \| s_j \right \|}^2} \frac{s_j}{\left \| s_j \right \|} \]
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+			<section>
+					<h2>Comparision of CNN and CapsNet on MNIST</h2>
+					<ul>
+						<li>MNIST dataset contains 28x28 images of handwritten digits</li>
+						<li>Baseline CNN is with 3 convolution and 3 fully connected layers</li>
+						<li>It has 256, 256, 128 channels in convolution layers and fc of size 328, 192 and 10 class classifier</li>
+						<li>This setup results in around 35.4M parameters</li>
+						<li>CapsNet for same has around 6.8M parameters</li>
+					</ul>
+	
 				</section>
 			</section>
 
@@ -442,17 +485,31 @@
 
 			</section>
 
-			<section>
+			<!-- <section>
 				<h2>Performance Analysis</h2>
 				<p>
 					performance analysis goes here
 				</p>
-			</section>
+			</section> -->
 			<section>
 				<h2>Conclusion</h2>
 				<p>
-					conclusion goes here
+					Thought the CapsuleNet model is in early stages compared to baseline CNN models, it shows promissing resuts with fewer trainable parameters while overcoming the problems of spatial invariance in CNN.
 				</p>
+			</section>
+			<section>
+				<h2>References</h2>
+				<small>
+					<ol>
+						<li>LeCun, Yann. "LeNet-5, convolutional neural networks." URL: http://yann. lecun. com/exdb/lenet (2015): 20.</li>
+						<li>Krizhevsky, A., Sutskever, I. and Hinton, G.E., 2012. Imagenet classification with deep convolutional neural networks. In Advances in neural information processing systems (pp. 1097-1105).</li>
+						<li>Simonyan, K. and Zisserman, A., 2014. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556.</li>
+						<li>Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I. and Salakhutdinov, R., 2014. Dropout: A simple way to prevent neural networks from overfitting. The Journal of Machine Learning Research, 15(1), pp.1929-1958.</li>
+						<li>Wu, H. and Gu, X., 2015, November. Max-pooling dropout for regularization of convolutional neural networks. In International Conference on Neural Information Processing (pp. 46-54). Springer, Cham.</li>
+						<li>Sabour, S., Frosst, N. and Hinton, G.E., 2017. Dynamic routing between capsules. In Advances in Neural Information Processing Systems (pp. 3859-3869).</li>
+						<li>Hinton, G., Frosst, N. and Sabour, S., 2018. Matrix capsules with EM routing.</li>
+					</ul>
+				</small>
 			</section>
 		</div>
 	</div>
