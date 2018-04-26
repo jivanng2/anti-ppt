@@ -1,0 +1,431 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Capsule Networks</h1>
+				<h4>An Advanced Approach to Object Recognition</h4>
+				<p>
+					<small>Presented by
+						<a href="#">Jivan Y Patil</a>
+					</small>
+				</p>
+			</section>
+
+			<section>
+				<section>
+					<h2>Introduction & Motivation</h2>
+				</section>
+				<section>
+					<h2>Introduction</h2>
+					<ul>
+						<li>Image processing by Brain.</li>
+						<li>Computer Vision Applications.</li>
+						<li>Importance of Neural Networks in CV.</li>
+						<li>Convolutional Neural Networks and Advantages.</li>
+						<li>Problems related to training NN model.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Motivation</h2>
+					<ul>
+						<li>Object rendering</li>
+						<li>CNN processes images in 2D</li>
+						<li>Representation of objects in the brain does not depend on view angle</li>
+						<li>Hardcoding 3D World into a Neural Net</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Object representation is stored as geometrical objects and matrices</li>
+							<li>This representation is converted into image by considering relative angle </li>
+							<li>Brain does opposite of rendering</li>
+							<li>Visual information is deconstructed and then matched with already learned patterns</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Convolutional Neural Networks</h2>
+				</section>
+				<section>
+					<h2>What is CNN?</h2>
+					<ul>
+						<li>A class of deep, feed-forward artificial neural networks.</li>
+						<li>Convolutional networks were inspired by biological processes.</li>
+						<li>It resembles the organization of the animal visual cortex.</li>
+						<li>Require little pre-processing</li>
+						<li>Learns the filters which are hand-engineered in traditional algorithms</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Structure of CNN</h2>
+					<div>
+						<img src="images\convnet.png">
+					</div>
+				</section>
+				<section>
+					<h2>Structure of CNN</h2>
+					<ul>
+						<li>Convolution Layer</li>
+						<li>Activation</li>
+						<li>Pooling Layer</li>
+						<li>Dropout Layer</li>
+						<li>Dense Layer</li>
+						<li>Softmax Layer</li>
+					</ul>
+				</section>
+				<section>
+					<h2>What Convolution Layer Does?</h2>
+					<small>
+						<blockquote>Convolution preserves the spatial relationship between pixels by learning image features using small squares of input
+							data.
+						</blockquote>
+					</small>
+					<div>
+						<img src="images\convLayer.gif" height="300px" />
+					</div>
+				</section>
+				<section>
+					<h2>What is Activation Function?</h2>
+					<small>
+						<blockquote cite="https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6">
+							It’s just a thing (node) that you add to the output end of any neural network. It is also known as Transfer Function. It
+							can also be attached in between two Neural Networks.
+						</blockquote>
+					</small>
+					<div>
+						<img src="images\activationLayer.png">
+					</div>
+				</section>
+				<section>
+					<h2>Activation/Feature Maps</h2>
+					<small>
+						<blockquote>
+							It is a mapping that corresponds to the activation of different parts of the image and also maps where a certain kind of
+							feature is found in the image.
+						</blockquote>
+					</small>
+					<img src="images\activationMaps.png" height="300px" />
+				</section>
+				<section>
+					<h2>Pooling Layer</h2>
+					<small>
+						<blockquote>
+							Spatial Pooling reduces the dimensionality of each feature map but retains the most important information.
+						</blockquote>
+					</small>
+					<div>
+						<img src="images\maxPooling.png" height="300px">
+					</div>
+				</section>
+				<section>
+					<h2>Dropout Layer</h2>
+					<small>
+						<blockquote>
+							Dropout layers are an indirect means of regularization and ensemble learning for neural networks
+						</blockquote>
+					</small>
+					<div>
+						<img src="images\dropout.png">
+					</div>
+					<aside class="notes">
+						Dropout layers are an indirect means of regularization and ensemble learning for neural networks [SHK+14]. Consider that
+						we have a layer with n activations. Consider now, we randomly zero-out neurons independently with Bernoulli probability
+						0.5 everytime we provide the network a training sample. We update the weights for only those weights that were not
+						zeroed-out during backprop. This in essence is the working of dropouts.
+					</aside>
+				</section>
+				<section>
+					<h2>Fully connected Layer</h2>
+					<small>
+						<blockquote>
+							The Fully Connected layer is a traditional Multi Layer Perceptron that uses a softmax activation function in the output layer.
+						</blockquote>
+					</small>
+					<div>
+						<img src="images\denseLayer.png">
+					</div>
+				</section>
+				<section>
+					<h2>What is Softmax?</h2>
+					<small class="fragment">
+						<blockquote>
+							The softmax function, or normalized exponential function, is a generalization of the logistic function that "squashes" a
+							K-dimensional vector \(\mathbf {z}\) of arbitrary real values to a K-dimensional vector \(\sigma(\mathbf{z})\) of
+							real values in the range (0, 1) that add up to 1.
+						</blockquote>
+					</small>
+					<div class="fragment">
+						<small>the predicted probability for the j'th class given a sample vector x and a weighting vector w is:</small>
+
+						\[P(y=j|x) = \frac{\mathbf{e}^{x^T w_j}}{\sum_{k=1}^K \mathbf{e}^{x^T w_k}} \]
+					</div>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>How CNN works?</h2>
+					<div class="fragment">
+						<img src="images\tensorflow-1.gif">
+					</div>
+				</section>
+				<section>
+					<h2>How Features are learned?</h2>
+					<ul>
+						<li>Convolution</li>
+						<li>Feed forward</li>
+						<li>Back Propagation</li>
+					</ul>
+				</section>
+				<section>
+					<h2>How Classification is done?</h2>
+					<ul>
+						<li>Fully Connected Layer</li>
+						<li>Classification with Softmax</li>
+					</ul>
+				</section>
+				<section>
+					<h2>CNN is Awesome!!! </h2>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Problems with CNN</h2>
+				</section>
+				<section>
+					<h2>Example</h2>
+					<img src="cnnProblemEx.png" heignt="300px">
+				</section>
+				<section>
+					<blockquote cite="https://medium.com/ai%C2%B3-theory-practice-business/understanding-hintons-capsule-networks-part-i-intuition-b4b559d1159b">
+						&ldquo;Internal data representation of a convolutional neural network does not take into account important spatial hierarchies
+						between simple and complex objects.&rdquo;
+					</blockquote>
+				</section>
+				<section>
+					<blockquote cite="https://mirror2image.wordpress.com/2014/11/11/geoffrey-hinton-on-max-pooling-reddit-ama/">
+						Hinton: &ldquo;The pooling operation used in convolutional neural networks is a big mistake and the fact that it works so
+						well is a disaster &rdquo;
+					</blockquote>
+				</section>
+				<section>
+					<h2>Reason?</h2>
+					<ul>
+						<li class="fragment">What Pooling Does?
+							<ul>
+								<li>Progressively reduces the spatial size of the representation</li>
+								<li>Relevant features get accumulated</li>
+							</ul>
+						</li>
+						<li class="fragment">How it affects overall perfformance?
+							<ul>
+								<li>Reduces training time by dimensionality reduction</li>
+								<li>Adds scale invariance</li>
+								<li>The NN can better identify objects by retaining spetial information unlike in case of CNN.</li>
+							</ul>
+						</li>
+						<li class="fragment">How it Affects Learning?
+							<ul>
+								<li>Loss of spatial information</li>
+								<li>Adds positional invariance</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>How Capsule Network are different from CNN?</h2>
+				</section>
+				<section>
+					<h2>Artificial Neuron</h2>
+					<small>
+						<blockquote cite="https://en.wikipedia.org/wiki/Artificial_neuron">
+							&ldquo;An artificial neuron is a mathematical function conceived as a model of biological neurons, a neural network&rdquo;
+						</blockquote>
+					</small>
+					<img src="images/Neuron.png" class="fragment" height="300px">
+				</section>
+				<section>
+					<h2>Capsule</h2>
+					<small>
+						<blockquote cite="https://en.wikipedia.org/wiki/Artificial_neuron">
+							&ldquo;Capsules encapsulate all important information about the state of the feature they are detecting in vector form.&rdquo;
+						</blockquote>
+					</small>
+					<img src="images/capsule.png" class="fragment" height="300px">
+				</section>
+				<section>
+					<h2>Capsule</h2>
+					<img src="images/capsuleExplained.png" height="400px">
+				</section>
+				<section>
+					<h2>No pooling layer</h2>
+					<p>Max pooling loses valuable information and also does not encode relative spatial relationships between features.</p>
+				</section>
+				<section>
+					<h2>Different Approach than CNN</h2>
+					<div>
+						<img src="images/cnn_caps_diff.png">
+					</div>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Capsule Networks</h2>
+				</section>
+				<section>
+					<h2>Overview</h2>
+					<ul>
+						<li>How human brain processes images?</li>
+						<li>CNN processes images in 2D unlike the human brain.</li>
+						<li>The NN can better identify objects by retaining spetial information unlike in case of CNN.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Structure of Capsule Network</h2>
+					<img src="images/capsnet.png" class="fragment" height="300px">
+				</section>
+				<section>
+					<h2>Structure of Capsule Network</h2>
+					<h4>Encoder</h4>
+					<small>
+						<blockquote>
+							Encoder part of the network takes as input a 28 by 28 MNIST digit image and learns to encode it into a 16-dimensional vector
+							of instantiation parameters
+						</blockquote>
+					</small>
+					<ul>
+						<li>Layer 1. Convolutional layer</li>
+						<li>Layer 2. PrimaryCaps layer</li>
+						<li>Layer 3. DigitCaps layer</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Structure of Capsule Network</h2>
+					<h4>Decoder</h4>
+					<small>
+						<blockquote>
+							Decoder takes a 16-dimensional vector from the correct DigitCap and learns to decode it into an image of a digit. Decoder
+							is used as a regularizer, it takes the output of the correct DigitCap as input and learns to recreate image.
+						</blockquote>
+					</small>
+					<ul>
+						<li>Layer 4. Fully connected #1</li>
+						<li>Layer 5. Fully connected #2</li>
+						<li>Layer 6. Fully connected #3</li>
+					</ul>
+				</section>
+				<section>
+					<h2>PrimaryCaps layer</h2>
+					<ul>
+						<li>
+							<p>primary capsules' job is to take basic features detected by the convolutional layer and produce combinations of the
+								features.
+							</p>
+						</li>
+						<li>
+							<p>Primary capsules are similar to convolutional layer in nature and perform similar operations.</p>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>DigitCaps layer</h2>
+					<ul>
+						<li>
+							This layer has n digit capsules, one for each class.
+						</li>
+						<li>
+							<p>Each of these input vectors gets their own 8x16 weight matrix that maps 8-dimensional input space to the 16-dimensional
+								capsule output space. </p>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Dynamic Routing between Capsules</h2>
+				</section>
+			</section>
+
+			<section>
+				<h2>Demo</h2>
+			</section>
+
+			<section>
+				<h2>Performance Analysis</h2>
+				<p>
+					performance analysis goes here
+				</p>
+			</section>
+			<section>
+				<h2>Conclusion</h2>
+				<p>
+					conclusion goes here
+				</p>
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+
+	<script>
+
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			math: { config: 'TeX-AMS_HTML-full' },
+			transition: 'zoom', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/search/search.js', async: true },
+				{ src: 'plugin/zoom-js/zoom.js', async: true },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'lib/js/classList.js' },
+				{ src: 'plugin/math/math.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>
